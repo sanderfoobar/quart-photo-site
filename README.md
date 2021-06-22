@@ -7,6 +7,8 @@ BigTech™ like flickr or instagram.
 
 Hacked together in 2 days so code quality is questionable at times (but it is secure).
 
+[Live example](https://photo.sanderf.nl/)
+
 ### Features
 
 This project aims to be minimalistic.:
@@ -20,11 +22,16 @@ This project aims to be minimalistic.:
 
 ### Installation
 
+```
+apt install -y python3-virtualenv libjpeg-dev libpng-dev
+```
+
 1. Clone project
 2. Create virtualenv
-3. copy `settings.py_example` to `settings.py`, change the passwords
-4. run `run.py` and call it a day
-5. Optionally put it behind nginx
+3. `pip install -r requirements.txt`
+4. copy `settings.py_example` to `settings.py`, change the passwords
+5. run `run.py` and call it a day
+6. Optionally put it behind nginx
 
 ### Screenshots
 

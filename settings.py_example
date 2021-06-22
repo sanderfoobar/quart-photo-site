@@ -6,14 +6,14 @@ def bool_env(val):
     return val is True or (isinstance(val, str) and (val.lower() == 'true' or val == '1'))
 
 
-debug = True
+debug = False
 host = "127.0.0.1"
 port = 2700
 timezone = "Europe/Amsterdam"
 
 # CHANGE THESE
 app_secret = "changeme"
-password = "changeme"  # for /admin
+password = "changeme"  # for /admin/login
 
 data_dir = os.path.join(cwd, "data")
 photos_dir = os.path.join(cwd, "data", "photos")
