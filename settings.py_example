@@ -1,0 +1,21 @@
+import os
+cwd = os.path.dirname(os.path.realpath(__file__))
+
+
+def bool_env(val):
+    return val is True or (isinstance(val, str) and (val.lower() == 'true' or val == '1'))
+
+
+debug = True
+host = "127.0.0.1"
+port = 2700
+timezone = "Europe/Amsterdam"
+
+# CHANGE THESE
+app_secret = "changeme"
+password = "changeme"  # for /admin
+
+data_dir = os.path.join(cwd, "data")
+photos_dir = os.path.join(cwd, "data", "photos")
+
+image_max_bounding_box = 2200

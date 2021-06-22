@@ -1,0 +1,162 @@
+body {
+    padding-bottom: 90px;
+}
+
+.fa {
+    margin-right: 4px;
+    color: #6d6d6d;
+}
+
+ul{
+    padding-left:0;
+}
+
+.container-xl{
+    max-width: 1600px !important;
+}
+
+.container-xl-portrait {
+    max-width: 1300px !important;
+}
+
+a.custom-card,
+a.custom-card:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.photo-view {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.photo-view > div:first-child {
+    position: relative;
+    padding: 0;
+}
+
+.photo-view a.pagination {
+    height:100%;
+    width:64px;
+    position: absolute;
+    opacity: 60%;
+    display: table;
+}
+
+.photo-view a.pagination:hover {
+    opacity: 100%;
+}
+
+.photo-view a.pagination > div {
+    width: 42px !important;
+    height: 42px;
+    background: rgba(0, 0, 0, 0.10);
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.photo-view a.pagination .fa {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.photo-view a.pagination .fa.right {
+    float: right;
+    transform: translateX(12%);
+}
+
+.photo-view a.pagination .fa.left {
+    float: left;
+    transform: translateX(-6%);
+}
+
+.photo-view img.landscape{
+    display: block;
+    max-width: 100%;
+}
+
+.photo-view img.portrait{
+    display: block;
+    max-height: 1000px;
+    max-width: 100%;
+}
+
+.navtop {
+    /*margin-left: 32px;*/
+    /*margin-right: 32px;*/
+    margin-top: 90px;
+}
+
+.navbar-nav {
+    font-size: 1.5em !important;
+    padding-right: 2rem;
+}
+
+.flashes {
+    margin-bottom: 0rem;
+    padding-left:4px;
+}
+
+ul.stream {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+ul.stream li {
+    height: 27vh;
+    flex-grow: 1;
+    margin: 3px;
+}
+
+ul.stream li.small {
+    height: 20vh;
+    flex-grow: 1;
+    margin: 3px;
+}
+
+ul.stream li:last-child {
+    flex-grow: 10;
+}
+
+ul.stream img {
+    max-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+
+/* Portrait */
+
+@media (max-aspect-ratio: 1/1) {
+    ul.stream li {
+        height: 22vh;
+    }
+}
+
+/* Short screens */
+
+@media (max-height: 480px) {
+    ul.stream li {
+        height: 80vh;
+    }
+}
+
+/* Smaller screens in portrait */
+
+@media (max-aspect-ratio: 1/1) and (max-width: 480px) {
+    ul.stream {
+        flex-direction: row;
+    }
+
+    ul.stream li {
+        height: auto;
+        width: 100%;
+    }
+
+    ul.stream img {
+        width: 100%;
+        max-height: 75vh;
+        min-width: 0;
+    }
+}

@@ -1,0 +1,70 @@
+<!-- batch editing multiple photos at once -->
+
+{% extends "base.html" %}
+{% block content %}
+  {% include "flash.html" %}
+  <div class="container-fluid navtop">
+    <ul class="stream">
+      {% for p in photos %}
+      <li class="small">
+        <a href="{{ url_for('routes.photo_view', photo_id=p.id) }}">
+          <img src="{{ url_for('routes.photo_src', filename=p.thumb) }}" alt="{{ p.description }}" loading="lazy">
+        </a>
+      </li>
+      {% endfor %}
+      <li class="small"></li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Batch edit photos</h4>
+        <form action="{{ url_for('routes_admin.photos_edit', p_ids=p_ids) }}" method="POST">
+          <div class="mb-3">
+            <label for="camera_model">Camera model</label>
+            <input id="camera_model" name="camera_model" placeholder="Canon A-1..." type="text" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="optics">Optics</label>
+            <input id="optics" name="optics" placeholder="FD 50mm T1.8..." type="text" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="date_taken">Date taken</label>
+            <input id="date_taken" name="date_taken" placeholder="2011-12-24" type="text" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="location">Location</label>
+            <input id="location" name="location" placeholder="Amsterdam..." type="text" class="form-control">
+          </div>
+
+          {% if albums %}
+            <div class="mb-3">
+              <h4>Albums</h4>
+              <div>
+                {% for a in albums %}
+                <div class="custom-controls-stacked">
+                  <div class="custom-control custom-checkbox">
+                    <input name="albums" id="checkbox_{{ loop.index }}" type="checkbox" class="custom-control-input" value="{{ a.id }}">
+                    <label for="checkbox_{{ loop.index }}" class="custom-control-label">{{ a.name }}</label>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+
+          <br>
+          <div class="mb-3">
+            <button name="submit" type="submit" class="btn btn-primary">edit album</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

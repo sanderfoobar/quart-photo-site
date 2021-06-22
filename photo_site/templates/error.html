@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!--main-->
+<div class="container" id="main">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"></div>
+        <div class="panel-body paste-body">
+          <p>{{message}}</p>
+          <br>
+          <p>
+            <a href="{{url_for('routes.index')}}">Go back to the main page</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
+  <!--/main-->
+{% endblock %}

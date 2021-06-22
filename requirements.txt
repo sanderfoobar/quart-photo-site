@@ -1,0 +1,8 @@
+quart
+quart-auth
+peewee
+pillow-simd
+python-magic
+aiofiles
+hypercorn
+python-dateutil

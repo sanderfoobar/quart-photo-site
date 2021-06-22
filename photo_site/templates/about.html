@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container navtop">
+  {% include "flash.html" %}
+
+  <div class="row">
+    <div class="col-md-6">
+      {% if about_text %}
+      {{ about_text | safe }}
+      {% else %}
+        Shrouded in mystery.
+      {% endif %}
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <span class="text-muted">
+        <a href="https://github.com/sferdi0/quart-photo-site" target="_blank">Fork me on Github</a>
+      </span>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

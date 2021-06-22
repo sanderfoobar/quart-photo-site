@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container navtop">
+  {% include "flash.html" %}
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Edit album</h4>
+      <form action="{{ url_for('routes_admin.album_edit', album_id=album.id) }}" method="POST">
+        <div class="mb-3">
+          <label for="name">Name</label>
+          <input id="name" name="name" placeholder="..." type="text" value="{{ album.name }}" required="required" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="description">Description</label>
+          <textarea id="description" placeholder="..." name="description" cols="40" rows="5" class="form-control">{{ album.description }}</textarea>
+        </div>
+
+        <br>
+        <div class="mb-3">
+          <button name="submit" type="submit" class="btn btn-primary">edit album</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

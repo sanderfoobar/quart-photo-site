@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  {% include "flash.html" %}
+  <div class="container-fluid navtop">
+    {% if not photos %}
+      Out of photos (ノಠ益ಠ)ノ彡┻━┻
+    {% endif %}
+    <ul class="stream">
+      {% for p in photos %}
+      <li>
+        <a href="{{ url_for('routes.photo_view', photo_id=p.id) }}">
+          <img src="{{ url_for('routes.photo_src', filename=p.thumb) }}" alt="{{ p.description }}" loading="lazy">
+        </a>
+      </li>
+      {% endfor %}
+      <li></li>
+    </ul>
+
+    {% if page_previous or page_next %}
+      <div class="btn-group" role="group">
+        {% if page_previous %}
+        <a href="{{ page_previous }}">
+          <button type="button" class="btn btn-secondary">Previous page</button>
+        </a>
+        {% endif %}
+
+        {% if page_next %}
+        <a href="{{ page_next }}" style="padding-left:20px;">
+          <button type="button" class="btn btn-secondary">Next page</button>
+        </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

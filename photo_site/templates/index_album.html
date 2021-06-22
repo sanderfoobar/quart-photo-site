@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+  {% block title %}{{ album.name }}{% endblock %}
+  {% include "flash.html" %}
+  <div class="container-fluid navtop">
+    <h4 style="margin-left:4px;">Album: {{ album.name }}</h4>
+
+    {% if album.description and photos %}
+      <col-md-6>
+      <p style="margin-left:4px;">{{ album.description }}</p>
+      </col-md-6>
+    {% endif %}
+    {% if not photos %}
+      Out of photos (ノಠ益ಠ)ノ彡┻━┻
+    {% endif %}
+    <ul class="stream" style="margin-top:38px;">
+      {% for p in photos %}
+      <li>
+        <a href="{{ url_for('routes.album_photo_view', album_id=album.id, photo_id=p.id) }}">
+          <img src="{{ url_for('routes.photo_src', filename=p.thumb) }}" alt="{{ p.description }}" loading="lazy">
+        </a>
+      </li>
+      {% endfor %}
+      <li></li>
+    </ul>
+
+    <div class="btn-group" role="group">
+      <a href="{{ page_previous }}">
+        <button type="button" class="btn btn-secondary">Previous page</button>
+      </a>
+
+      <a href="{{ page_next }}" style="padding-left:20px;">
+        <button type="button" class="btn btn-secondary">Next page</button>
+      </a>
+    </div>
+
+  </div>
+{% endblock %}

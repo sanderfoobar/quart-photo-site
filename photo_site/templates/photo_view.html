@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% block title %}
+      {% if photo.title %}
+        {{ photo.title }}
+      {% else %}
+        Photo
+      {% endif %}
+    {% endblock %}
+
+  {% set url = url_for('routes.photo_src', filename=photo.filename) %}
+  {% set is_auth = current_user.is_authenticated %}
+
+  {% if photo.landscape %}
+    <div class="container-xl navtop">
+  {% else %}
+    <div class="container-xl container-xl-portrait navtop">
+  {% endif %}
+    {% include "flash.html" %}
+    <div class="row photo-view">
+
+      {% if photo.landscape %}
+        <div class="col-md-12 ">
+      {% else %}
+        <div class="col-md-6">
+      {% endif %}
+
+      {% if previous_photo %}
+      <a href="{{ previous_photo }}" class="pagination" style="left:0">
+        <div><i class="fa left fa-arrow-left" style="padding-left: 20px;"></i></div>
+      </a>
+      {% endif %}
+
+      {% if next_photo %}
+      <a href="{{ next_photo }}" class="pagination" style="right:0">
+        <div><i class="fa right fa-arrow-right" style="padding-right: 20px;"></i></div>
+      </a>
+      {% endif %}
+
+      <img class="{% if photo.landscape %}landscape{% else %}portrait{% endif %}" src="{{ url }}" alt="" class="img-fluid w-100" />
+      </div>
+
+      {% if photo.landscape %}
+      <div class="col-md-6" style="margin-top:20px;">
+      {% else %}
+      <div class="col-md-6" style="padding-left: 20px;">
+      {% endif %}
+        <form action="{{ url_for('routes_admin.photos_edit', p_ids=photo.id) }}" method="POST">
+          {% if is_auth %}
+            <div class="mb-3">
+              <label for="title">Title</label>
+              <input id="title" name="title" placeholder="..." type="text" value="{{ photo.title }}" class="form-control">
+            </div>
+          {% elif photo.title %}
+            <h2>{{ photo.title }}</h2>
+          {% endif %}
+
+          {% if is_auth %}
+          <div class="mb-3">
+            <label for="description">Description</label>
+            <textarea id="description" placeholder="..." name="description" cols="40" rows="5" style="resize: none;" class="form-control">{{ photo.description }}</textarea>
+          </div>
+          {% elif photo.description %}
+            <p>{{ photo.description }}</p>
+          {% endif %}
+
+          {% if not is_auth %}
+          <ul>
+            <li>
+              <i class="fa fa-eye"></i> {{ photo.views }}
+            </li>
+
+            <li>
+              <i class="fa fa-ruler-combined"></i> {{ photo.width }} x {{ photo.height }}
+            </li>
+
+            {% if photo.camera %}
+            <li>
+              <i class="fa fa-camera"></i> Canon A-1
+            </li>
+            {% endif %}
+
+            {% if photo.optics %}
+            <li>
+              <i class="fa fa-glasses"></i> {{ photo.optics }}
+            </li>
+            {% endif %}
+
+            {% if photo.location %}
+            <li>
+              <i class="fa fa-location-arrow"></i> {{ photo.location }}
+            </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+
+          {% if photo.album_ids and not is_auth %}
+            {% if photo.album_ids | length == 1 %}
+              <h4>Album</h4>
+            {% else %}
+              <h4>Albums</h4>
+            {% endif %}
+            <ul>
+            {% for a in albums %}
+              {% if a.id in photo.album_ids %}
+                <li>
+                  <a href="{{ url_for('routes.album_view', album_id=a.id) }}"><i class="fa fa-images"></i> {{ a.name }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+            </ul>
+          {% endif %}
+
+          {% if is_auth %}
+          <div class="mb-3">
+            <label for="location">Location</label>
+            <input id="location" name="location" value="{{ photo.location }}" placeholder="" type="text" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="camera_model">Camera model</label>
+            <input id="camera_model" name="camera_model" value="{{ photo.camera }}" placeholder="" type="text" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="optics">Optics</label>
+            <input id="optics" name="optics" value="{{ photo.optics }}" placeholder="" type="text" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="date_taken">Date taken</label>
+            <input id="date_taken" name="date_taken" value="{{ photo.date_taken }}" placeholder="" type="text" class="form-control">
+          </div>
+
+          {% if albums %}
+            <br>
+            <div class="mb-3">
+              <h4>Albums</h4>
+              <div>
+                {% for a in albums %}
+                <div class="custom-controls-stacked">
+                  <div class="custom-control custom-checkbox">
+                    <input name="albums" id="checkbox_{{ loop.index }}" type="checkbox" {% if a.id in photo.album_ids %}checked="checked"{% endif %} class="custom-control-input" value="{{ a.id }}">
+                    <label for="checkbox_{{ loop.index }}" class="custom-control-label">{{ a.name }}</label>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+
+          <br>
+
+          <div class="btn-group" role="group">
+            <a href="{{ url_for('routes_admin.photo_delete', photo_id=photo.id) }}">
+              <button type="button" class="btn btn-danger">Delete</button>
+            </a>
+            <button type="button" class="btn btn-secondary"></button>
+            <button name="submit" type="submit" class="btn btn-primary">Update</button>
+          </div>
+
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
