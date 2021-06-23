@@ -9,7 +9,7 @@ bp_routes = Blueprint('routes', __name__)
 @bp_routes.route('/<int:page>')
 async def index(page: int = 1):
     from photo_site.models import Photo, PhotoAlbumAssoc, Album
-    limit = 30
+    limit = 60
     offset = (page - 1) * limit
     photos = Photo.select(Photo).order_by(Photo.date_added.desc()).limit(limit).offset(offset)
 
@@ -39,7 +39,7 @@ async def albums_view():
 @bp_routes.route('/a/<int:album_id>/<int:page>')
 async def album_view(album_id, page: int = 1):
     from photo_site.models import Photo, PhotoAlbumAssoc, Album
-    limit = 30
+    limit = 60
     offset = (page - 1) * limit
 
     album = Album.select().where(Album.id == album_id).get()
