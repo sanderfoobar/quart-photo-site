@@ -2,16 +2,17 @@
 
 A photo site made using Python3 asyncio with the Quart framework.
 
-Made as an alternative for people who want to self-host their photos without relying on
-BigTech™ like flickr or instagram.
+Made as an alternative for people who want to self-host their 
+photos without relying on flickr or instagram.
 
-Hacked together in 2 days so code quality is questionable at times (but it is secure).
+Hacked together in 2 days so code quality is questionable at 
+times (but it is secure).
 
 [Live example](https://photo.sanderf.nl/)
 
 ### Features
 
-This project aims to be minimalistic.:
+This project aims to be minimalistic:
 
 - No javascript
 - SQLite based backend
@@ -29,8 +30,8 @@ apt install -y python3-virtualenv libjpeg-dev libpng-dev
 1. Clone project
 2. Create virtualenv
 3. `pip install -r requirements.txt`
-4. copy `settings.py_example` to `settings.py`, change the passwords
-5. run `run.py` and call it a day
+4. Copy `settings.py_example` to `settings.py`, change the passwords
+5. Run `run.py` and call it a day
 6. Optionally put it behind nginx
 
 ### Screenshots

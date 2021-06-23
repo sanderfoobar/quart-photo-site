@@ -39,7 +39,7 @@ a.custom-card:hover {
     height:100%;
     width:64px;
     position: absolute;
-    opacity: 60%;
+    opacity: 50%;
     display: table;
 }
 
