@@ -71,6 +71,12 @@
               <i class="fa fa-eye"></i> {{ photo.views }}
             </li>
 
+            {% if photo.date_taken %}
+            <li>
+              <i class="fa fa-clock"></i> {{ photo.date_taken.strftime('%Y-%m-%d') }}
+            </li>
+            {% endif %}
+
             <li>
               <i class="fa fa-ruler-combined"></i> {{ photo.width }} x {{ photo.height }}
             </li>
